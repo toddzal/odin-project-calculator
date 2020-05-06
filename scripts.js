@@ -42,16 +42,25 @@ function checkInput(e) {
 function evalExpr() {
   let inp = inputBar.value;
   let tempInp = "";
+  let decCount = 0;
   let inputArr = [];
 
   //push to array
   for (let i = 0; i < inp.length; i++) {
-    if (/[-+*\/]/.test(inp[i])) {
-      inputArr.push(parseInt(tempInp, 0));
+    if (/[-+*/]/.test(inp[i])) {
+      console.log(parseFloat(tempInp, 0));
+      inputArr.push(parseFloat(tempInp, 0));
       inputArr.push(inp[i]);
       tempInp = "";
     } else {
-      tempInp += inp[i];
+      if (inp[i] === ".") {
+        decCount += 1;
+        if (decCount === 1) {
+          tempInp += inp[i];
+        }
+      } else {
+        tempInp += inp[i];
+      }
     }
     if (i === inp.length - 1) {
       inputArr.push(parseInt(tempInp, 0));
